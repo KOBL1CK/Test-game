@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сортировка мусора</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; background: #f0f8ff; margin: 0; padding: 20px; }
+    #item { font-size: 24px; font-weight: bold; margin: 30px auto; padding: 20px; background: #fff; border: 2px dashed #333; width: 200px; border-radius: 10px; }
+    .bins { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .bin { padding: 15px 20px; background: #4CAF50; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
+    .bin.paper { background: #2196F3; }
+    .bin.glass { background: #FF9800; }
+    #score { font-size: 20px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+  <h1>Сортировка мусора</h1>
+  <div id="item">Загрузка...</div>
+
+  <div class="bins">
+    <button class="bin" onclick="check('plastic')">Пластик</button>
+    <button class="bin paper" onclick="check('paper')">Бумага</button>
+    <button class="bin glass" onclick="check('glass')">Стекло</button>
+  </div>
+
+  <div id="score">Очки: 0</div>
+
+  <script>
+    const items = [
+      { name: "Пластиковая бутылка", type: "plastic" },
+      { name: "Старая газета", type: "paper" },
+      { name: "Стеклянная банка", type: "glass" },
+      { name: "Пакет от сока", type: "plastic" },
+      { name: "Картонная коробка", type: "paper" }
+    ];
+
+    let currentItem = {};
+    let score = 0;
+
+    function nextItem() {
+      const randomIndex = Math.floor(Math.random() * items.length);
+      currentItem = items[randomIndex];
+      document.getElementById("item").innerText = currentItem.name;
+    }
+
+    function check(category) {
+      if (category === currentItem.type) {
+        score += 10;
+        alert("Правильно! +10 очков");
+      } else {
+        alert("Неверно, попробуй еще раз!");
+      }
+      document.getElementById("score").innerText = "Очки: " + score;
+      nextItem();
+    }
+
+    nextItem();
+  </script>
+</body>
+</html>
